@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VaZi Luxury | Nairobi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--gold:#d4af37;
+--purple:#9b59b6;
+--white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Work Sans',sans-serif;
+background:#0a0a0a; /* Dark black base */
+color:white;
+overflow-x:hidden;
+position:relative;
+}
+h1,h2,h3,h4,h5,h6{
+font-family:'Playfair Display',serif;
+}
+
+/* --- White-Purple Glowing Background over Black --- */
+body::before, body::after{
+content:"";
+position:fixed;
+top:-400px;
+left:-400px;
+width:1200px;
+height:1200px;
+border-radius:50%;
+z-index:-2;
+filter:blur(200px);
+opacity:0.3;
+}
+
+body::before{
+background:radial-gradient(circle, rgba(255,255,255,0.5), rgba(155,89,182,0.2));
+animation:moveGlow1 12s infinite alternate;
+}
+
+body::after{
+background:radial-gradient(circle, rgba(255,255,255,0.4), rgba(155,89,182,0.15));
+animation:moveGlow2 14s infinite alternate-reverse;
+}
+
+@keyframes moveGlow1{
+0%{transform:translate(0,0);}
+100%{transform:translate(400px,300px);}
+}
+@keyframes moveGlow2{
+0%{transform:translate(0,0);}
+100%{transform:translate(-300px,200px);}
+}
+
+/* --- Navigation --- */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+padding:15px 40px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid #222;
+position:sticky;
+top:0;
+z-index:1000;
+}
+.logo{
+color:var(--gold);
+font-weight:800;
+font-size:32px;
+font-family:'Playfair Display',serif;
+white-space:nowrap;
+}
+.nav-search-container{
+flex:1;
+max-width:400px;
+}
+
+/* --- Hero Section --- */
+.hero{
+text-align:center;
+padding:60px 20px 40px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+.hero h1{
+margin-bottom:10px;
+font-size:2.5em;
+}
+.hero p{
+margin-bottom:15px;
+font-size:0.95em;
+color:#ccc;
+}
+.search-bar{
+padding:12px 20px;
+border-radius:50px;
+border:none;
+outline:none;
+width:100%;
+font-size:14px;
+box-shadow:0 0 15px var(--white),0 0 25px var(--purple),0 0 40px var(--gold);
+transition:0.3s;
+text-align:left;
+animation:pulseSearch 3s infinite;
+}
+@keyframes pulseSearch{
+0%,100%{box-shadow:0 0 25px var(--white),0 0 40px var(--purple),0 0 60px var(--gold);}
+50%{box-shadow:0 0 35px var(--white),0 0 50px var(--purple),0 0 80px var(--gold);}
+}
+
+/* --- Products --- */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+gap:25px;
+padding:40px;
+}
+.product{
+background:rgba(20,20,20,0.9);
+padding:15px;
+border-radius:15px;
+position:relative;
+transition:0.3s;
+overflow:hidden;
+}
+.product:hover{transform:translateY(-8px);box-shadow:0 0 15px var(--gold),0 0 25px var(--purple);}
+.product img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+transition:0.4s;
+}
+.product:hover img{transform:scale(1.08);}
+.price{
+display:flex;
+justify-content:space-between;
+margin-top:10px;
+}
+.stock{font-size:13px;color:var(--gold);}
+.wishlist{
+position:absolute;
+top:10px;
+right:10px;
+background:white;
+color:red;
+padding:6px 10px;
+border-radius:50%;
+cursor:pointer;
+z-index:2;
+}
+.discount-tag{
+position:absolute;
+top:10px;
+left:10px;
+background:var(--gold);
+color:black;
+padding:5px 10px;
+border-radius:10px;
+font-weight:600;
+font-size:13px;
+z-index:2;
+box-shadow:0 0 10px var(--gold);
+}
+
+/* --- Buttons --- */
+.gold-btn{
+background:var(--gold);
+color:black;
+border:none;
+padding:8px 15px;
+border-radius:25px;
+cursor:pointer;
+transition:0.3s;
+animation:glowBtn 3s infinite;
+}
+.gold-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px var(--gold),0 0 40px var(--white);
+}
+@keyframes glowBtn{
+0%,100%{box-shadow:0 0 10px var(--gold);}
+50%{box-shadow:0 0 20px var(--gold),0 0 30px var(--white);}
+}
+
+/* --- Cart --- */
+.cart-button{
+position:fixed;
+top:20px;
+right:20px;
+z-index:2000;
+}
+.cart{
+position:fixed;
+right:0;
+top:0;
+width:350px;
+height:100%;
+background:#111;
+padding:20px;
+transform:translateX(100%);
+transition:0.4s;
+overflow:auto;
+}
+.cart.active{transform:translateX(0);}
+.cart-item{display:flex;justify-content:space-between;margin-bottom:10px;}
+
+/* --- Footer --- */
+footer{text-align:center;padding:30px;background:#111;margin-top:40px;color:#ddd;}
+
+/* --- Welcome Popup --- */
+#welcomePopup{
+position:fixed;
+top:20%;
+left:50%;
+transform:translateX(-50%);
+background:rgba(155,89,182,0.95);
+color:white;
+padding:25px 40px;
+border-radius:20px;
+text-align:center;
+font-weight:600;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+opacity:0;
+z-index:3000;
+pointer-events:none;
+animation:fadeInOut 6s forwards;
+}
+@keyframes fadeInOut{
+0%{opacity:0;transform:translateX(-50%) translateY(-20px);}
+10%{opacity:1;transform:translateX(-50%) translateY(0);}
+90%{opacity:1;transform:translateX(-50%) translateY(0);}
+100%{opacity:0;transform:translateX(-50%) translateY(-20px);}
+}
+
+/* --- Floating Banner --- */
+.floating-banner{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:var(--gold);
+color:black;
+padding:12px 25px;
+font-weight:700;
+border-radius:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+animation:floatBanner 2s infinite alternate;
+z-index:1500;
+}
+@keyframes floatBanner{
+0%{transform:translateX(-50%) translateY(0);}
+100%{transform:translateX(-50%) translateY(-10px);}
+}
+</style>
+</head>
+<body>
+
+<div class="floating-banner">🔥 First Order? 10% OFF + Buy 4 Get 1 Free + Cashback! 🔥</div>
+
+<div id="welcomePopup">
+<h2>💜 Welcome to VaZi Luxury!</h2>
+<p>Premium Somali fashion & amazing first order cashback!</p>
+</div>
+
+<nav>
+<div class="logo">VaZi</div>
+<div class="nav-search-container">
+<input type="text" class="search-bar" placeholder="Search products..." onkeyup="searchProducts(this.value)">
+</div>
+</nav>
+
+<section class="hero">
+<h1 style="color:#9b59b6;">Somali Luxury Redefined</h1>
+<p>Premium Cultural Fashion | Nairobi</p>
+</section>
+
+<button onclick="toggleCart()" class="gold-btn cart-button">🛒 Cart (<span id="cartCount">0</span>)</button>
+
+<section class="products" id="productList"></section>
+
+<div class="cart" id="cartPanel">
+<h2 style="color:#9b59b6;">Checkout</h2>
+<div id="cartItems"></div>
+<h3>Total: KSH <span id="totalPrice">0</span></h3>
+<button class="gold-btn" onclick="whatsappOrder()">Order via WhatsApp</button>
+</div>
+
+<footer>© 2026 VaZi Luxury | Nairobi Kenya</footer>
+
+<script>
+// Products 105 items
+let products=[ "Royal Blue Silk Dirac","Emerald Wedding Dirac","Gold Embroidered Dirac","Classic Cotton Baati","Traditional Guntiino",
+"Luxury Khimar","Blue Pattern Macawiis","Classic White Koofiyad","White Khamiis","Modern Dirac Abaya",
+"Somali Print Kaftan","Luxury African Dress","Somali Print Blazer","Cultural Shirt","Luxury Cultural Suit",
+"Somali Wedding Belt","Cultural Jewelry Set","Handmade Sandals","Luxury Necklace","Silk Turban",
+"Red Silk Dirac","Pink Wedding Dirac","Green Embroidered Dirac","Yellow Cotton Baati","Traditional Brown Guntiino",
+"Premium Khimar","Striped Macawiis","White Embroidered Koofiyad","Blue Khamiis","Modern Dirac Abaya Deluxe",
+"Kaftan with Somali Print","African Luxury Dress","Somali Blazer Set","Cultural Tunic","Cultural Suit Deluxe",
+"Wedding Gold Belt","Jewelry Set Deluxe","Handmade Leather Sandals","Diamond Necklace","Silk Headscarf",
+"Purple Silk Dirac","Turquoise Wedding Dirac","Golden Dirac","Soft Cotton Baati","Traditional White Guntiino",
+"Luxury Modest Khimar","Patterned Macawiis","Embroidered Koofiyad","White Khamiis Deluxe","Dirac Abaya Modern",
+"Kaftan Luxury","African Print Dress","Somali Designer Blazer","Traditional Shirt","Cultural Suit Premium",
+"Wedding Silver Belt","Luxury Jewelry","Handmade Sandals Premium","Gold Necklace","Silk Wrap Turban",
+"Blue Silk Dirac","Emerald Dirac","Luxury Gold Dirac","Classic Cotton Baati Deluxe","Traditional Guntiino Premium",
+"Khimar Abaya Deluxe","Macawiis Pattern","Koofiyad Deluxe","Khamiis White Modern","Dirac Abaya Traditional",
+"Kaftan Modern","Luxury African Print Dress","Somali Blazer Premium","Cultural Shirt Deluxe","Cultural Suit Luxury",
+"Wedding Belt Premium","Cultural Jewelry","Leather Sandals Luxury","Necklace Premium","Silk Turban Deluxe",
+"Red Dirac","Emerald Luxury Dirac","Golden Embroidered Dirac","Classic Baati Modern","Guntiino Deluxe",
+"Premium Khimar Abaya","Macawiis Blue","Koofiyad White","Khamiis Traditional","Dirac Abaya Premium",
+"Kaftan Somali","African Dress Modern","Somali Blazer Deluxe","Cultural Shirt Premium","Luxury Cultural Suit",
+"Wedding Belt Gold","Jewelry Set Luxury","Handmade Sandals Deluxe","Luxury Necklace Gold","Silk Turban Premium",
+"Purple Dirac","Wedding Dirac Pink","Embroidery Dirac","Baati Cotton Classic","Traditional Guntiino Deluxe"
+];
+
+let cart=[]; let isFirstPurchase=true;
+const list=document.getElementById("productList");
+function generatePrice(){let price=Math.floor(Math.random()*4500 + 1000);price=Math.floor(price/100)*100;if(price>5500)price=5500;return price;}
+function isValuableItem(name){const valuableKeywords=['Wedding','Luxury','Gold','Diamond','Jewelry','Premium','Deluxe','Handmade','Silk'];return valuableKeywords.some(keyword=>name.includes(keyword));}
+function getStockDisplay(name){const isValuable=isValuableItem(name);if(isValuable){if(Math.random()<0.3){return'Limited Stock!';}else{const quantity=Math.floor(Math.random()*10)+1;return quantity+' left';}}else{const quantity=Math.floor(Math.random()*15)+3;return quantity+' left';}}
+function renderProducts(filteredProducts=products){list.innerHTML="";filteredProducts.forEach((name,index)=>{let basePrice=generatePrice();let discountedPrice=Math.floor(basePrice*0.9/100)*100;let imgIndex=index+1;let stockDisplay=getStockDisplay(name);let productHTML=`
+<div class="product">
+<div class="wishlist" onclick="addToWishlist('${name}')">❤</div>
+<div class="discount-tag">10% OFF</div>
+<img src="images/${imgIndex}.jpg.jpeg" alt="${name}">
+<h3>${name}</h3>
+<p class="stock">${stockDisplay}</p>
+<div class="price">
+<span>KSH ${discountedPrice}</span>
+<button class="gold-btn" onclick="addToCart('${name}',${discountedPrice})">Add</button>
+</div>
+</div>`;list.innerHTML+=productHTML;});}
+
+// Add to cart logic
+function addToCart(name,price){
+let item=cart.find(i=>i.name===name);
+if(item){item.quantity++;}else{cart.push({name,price,quantity:1});}
+let totalItems=cart.reduce((sum,c)=>sum+c.quantity,0);
+let freeItems=Math.floor(totalItems/5);
+cart=cart.filter(c=>c.name!=="🎁 Free Gift");
+if(freeItems>0) cart.push({name:"🎁 Free Gift",price:0,quantity:freeItems});
+let total=cart.reduce((sum,c)=>sum+c.price*c.quantity,0);
+let cashback=0;
+if(isFirstPurchase && total>0){cashback=Math.floor(total*0.05/100)*100;isFirstPurchase=false;}
+updateCart(cashback);
+}
+function updateCart(cashback=0){let total=0;let area=document.getElementById("cartItems");area.innerHTML="";cart.forEach((c,i)=>{total+=c.price*c.quantity;area.innerHTML+=`<div class="cart-item"><span>${c.name} x ${c.quantity} - KSH ${c.price*c.quantity}</span><button onclick="removeItem(${i})">x</button></div>`;});document.getElementById("totalPrice").innerText=total-cashback;document.getElementById("cartCount").innerText=cart.reduce((sum,c)=>sum+c.quantity,0);}
+function removeItem(i){cart.splice(i,1);updateCart();}
+function toggleCart(){document.getElementById("cartPanel").classList.toggle("active");}
+function whatsappOrder(){if(cart.length===0){alert("Cart is empty!");return;}let orderList=cart.map(c=>`${c.name} x ${c.quantity}`).join('%0A');window.open(`https://wa.me/254725549418?text=Hello VaZi Luxury I want to order:%0A${orderList}`);}
+function addToWishlist(name){alert(name+" added to wishlist ❤️");}
+function searchProducts(value){let filtered=products.filter(p=>p.toLowerCase().includes(value.toLowerCase()));renderProducts(filtered);}
+window.addEventListener("load",()=>{
+const popup=document.getElementById("welcomePopup");
+setTimeout(()=>{popup.style.display="none";},6000);
+// Auto-add 4 random products on load
+for(let i=0;i<4;i++){let name=products[Math.floor(Math.random()*products.length)];let price=generatePrice();addToCart(name,price);}
+renderProducts();
+});
+</script>
+</body>
+</html>
